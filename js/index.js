@@ -7,7 +7,7 @@ $(".menu button").click((e) => {
 });
 function callBack(settings) {
     console.log(settings);
-    for (let i = 0; i < settings.results.length; i++) {
+    for (let i in settings.results) {
         console.log(settings.results[i].name);
         $("<a href='" + settings.results[i].url + "'>" + settings.results[i].name + "</a><br>").appendTo(liste);
     }
