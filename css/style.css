@@ -1,3 +1,13 @@
+body {
+    height: 100vh;
+    background-image: url(../img/pokemon.jpg);
+    object-fit: contain;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    overflow: auto;
+    
+}
 :root {
     --col1: chartreuse;
     --col2: darkorchid;
