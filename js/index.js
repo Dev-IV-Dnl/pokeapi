@@ -5,7 +5,6 @@ function callBack(settings,id) {
     // console.log(settings);
     for (let i in settings.results) {
         // console.log(settings.results[i].name);
-        // $("<a class='details' href='" + settings.results[i].url + "'>" + settings.results[i].name + "</a><br>").appendTo(liste);
         $("<button class='details' id='details"+i+"'>" + settings.results[i].name + "</button><br>").appendTo(liste);
         if(id === "berry") {
             $("#details"+i).click( ()=> {
