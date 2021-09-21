@@ -1,0 +1,45 @@
+:root {
+    --col1: chartreuse;
+    --col2: darkorchid;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+.menu>*{
+    border: solid var(--col1) 1px;
+    color: var(--col2);
+    background-color: var(--col1);
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 5px;
+}
+.menu>*:hover {
+    background-color: var(--col2);
+    color: var(--col1);
+    cursor: pointer;
+}
+
+#liste {
+    width: 90%;
+    margin: 30px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#liste>*{
+    color: var(--col1);
+    border: solid var(--col1) 1px;
+    background-color: var(--col2);
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 5px;
+    margin-bottom: 5px;
+}
