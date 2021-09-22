@@ -1,3 +1,10 @@
+:root {
+    --col1: chartreuse;
+    --col2: darkorchid;
+    --col3: #333;
+    --col4: #F1F1F1;
+}
+
 body {
     height: 100vh;
     background-image: url(../img/pokemon.jpg);
@@ -7,10 +14,6 @@ body {
     background-repeat: no-repeat;
     overflow: auto;
     
-}
-:root {
-    --col1: chartreuse;
-    --col2: darkorchid;
 }
 
 .menu {
@@ -48,6 +51,16 @@ body {
     color: var(--col1);
     border: solid var(--col1) 1px;
     background-color: var(--col2);
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+#details {
+    color: var(--col3);
+    border: solid var(--col3) 1px;
+    background-color: var(--col4);
     border-radius: 10px;
     font-weight: bold;
     padding: 5px;
