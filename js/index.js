@@ -13,6 +13,7 @@ $(".menu button").click(e => {
 //ma 1ère callBack
 function requeteListe(url, id) {
     $.get(url, settings => {
+        details.html("");
         let monOffset = new URL(url).searchParams.get("offset") || 0;
         console.log(monOffset, url, settings);
         for (let i in settings.results) {
@@ -84,51 +85,51 @@ function requeteListe(url, id) {
 function requeteDetailBerry(settings) {
     console.log(settings);
     liste.html("");
-    $("<div> Name : " + settings.name + "</div>").appendTo(liste);
-    $("<div> firmness : " + settings.firmness.name + "</div>").appendTo(liste);
+    $("<div> Name : " + settings.name + "</div>").appendTo(details);
+    $("<div> firmness : " + settings.firmness.name + "</div>").appendTo(details);
     let txtTmp = "<div> flavor : ";
     for (let f = 0; f <= settings.flavors.length - 2; f++) {
         txtTmp += settings.flavors[f].flavor.name + ", ";
     }
     txtTmp += settings.flavors[4].flavor.name;
     txtTmp += "</div>"
-    $(txtTmp).appendTo(liste);
-    $("<div> Growth time : " + settings.growth_time + "</div>").appendTo(liste);
-    $("<div> Item : " + settings.item.name + "</div>").appendTo(liste);
-    $("<div> Max harvest : " + settings.max_harvest + "</div>").appendTo(liste);
-    $("<div> Natural gift Power : " + settings.natural_gift_power + "</div>").appendTo(liste);
-    $("<div> Natural gift type : " + settings.natural_gift_type.name + "</div>").appendTo(liste);
-    $("<div> Size : " + settings.size + "</div>").appendTo(liste);
-    $("<div> Smoothness : " + settings.smoothness + "</div>").appendTo(liste);
-    $("<div> Soil dryness : " + settings.soil_dryness + "</div>").appendTo(liste);
+    $(txtTmp).appendTo(details);
+    $("<div> Growth time : " + settings.growth_time + "</div>").appendTo(details);
+    $("<div> Item : " + settings.item.name + "</div>").appendTo(details);
+    $("<div> Max harvest : " + settings.max_harvest + "</div>").appendTo(details);
+    $("<div> Natural gift Power : " + settings.natural_gift_power + "</div>").appendTo(details);
+    $("<div> Natural gift type : " + settings.natural_gift_type.name + "</div>").appendTo(details);
+    $("<div> Size : " + settings.size + "</div>").appendTo(details);
+    $("<div> Smoothness : " + settings.smoothness + "</div>").appendTo(details);
+    $("<div> Soil dryness : " + settings.soil_dryness + "</div>").appendTo(details);
 }
 
 //Ma Contest-type callBack
 function requeteDetailContestType(settings) {
     console.log(settings);
     liste.html("");
-    $("<h3>" + settings.name + "</h3><br><p>Il s'agit de la statistique : " + settings.names[0].name + "</p>").appendTo(liste);
+    $("<h3>" + settings.name + "</h3><br><p>Il s'agit de la statistique : " + settings.names[0].name + "</p>").appendTo(details);
 }
 
 //Ma Encounters callBack
 function requeteDetailEncounters(settings) {
     console.log(settings);
     liste.html("");
-    $("<h3>" + settings.name + "</h3><br><p>On les rencontre dans : " + settings.names[1].name + "</p>").appendTo(liste);
+    $("<h3>" + settings.name + "</h3><br><p>On les rencontre dans : " + settings.names[1].name + "</p>").appendTo(details);
 }
 
 //Ma Evolutions callBack
 function requeteDetailEvolutions(settings) {
     console.log(settings);
     liste.html("");
-    $("<h3>" + settings.chain.species.name + "</h3><br><p>Evolue en : " + settings.chain.evolves_to[0].species.name + "</p>").appendTo(liste);
+    $("<h3>" + settings.chain.species.name + "</h3><br><p>Evolue en : " + settings.chain.evolves_to[0].species.name + "</p>").appendTo(details);
 }
 
 //Ma Generations callBack
 function requeteDetailGenerations(settings) {
     console.log(settings);
     liste.html("");
-    $("<h3>" + settings.chain.species.name + "</h3><br><p>Evolue en : " + settings.chain.evolves_to[0].species.name + "</p>").appendTo(liste);
+    $("<h3>" + settings.chain.species.name + "</h3><br><p>Evolue en : " + settings.chain.evolves_to[0].species.name + "</p>").appendTo(details);
 }
 
 function string(object) {
