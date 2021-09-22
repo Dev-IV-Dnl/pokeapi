@@ -1,11 +1,11 @@
 const baseUrl = "https://pokeapi.co/api/v2/";
 let liste = $("#liste");
-let details = $(".details");
+let details = $("#details");
 
 //Evènement click permettant d'afficher les listes des baies, encounters, evolutions, generations, objets, lieux, machines, attaques et évidemment les pokemons
 $(".menu button").click(e => {
     liste.html("");
-    requeteListe(baseUrl + e.target.id, e.target.id)
+    requeteListe(baseUrl + e.target.id, e.target.id);
     //   $.get(baseUrl + e.target.id, s => requeteListe(s, e.target.id));
 });
 
@@ -101,7 +101,6 @@ function requeteDetailBerry(settings) {
     $("<div> Size : " + settings.size + "</div>").appendTo(liste);
     $("<div> Smoothness : " + settings.smoothness + "</div>").appendTo(liste);
     $("<div> Soil dryness : " + settings.soil_dryness + "</div>").appendTo(liste);
-
 }
 
 //Ma Contest-type callBack

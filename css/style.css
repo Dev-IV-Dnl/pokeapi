@@ -46,7 +46,6 @@ body {
     flex-direction: column;
     
 }
-
 #liste>*{
     color: var(--col1);
     border: solid var(--col1) 1px;
@@ -58,9 +57,16 @@ body {
 }
 
 #details {
-    color: var(--col3);
-    border: solid var(--col3) 1px;
-    background-color: var(--col4);
+    width: 90%;
+    margin: 30px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+#details>*{
+    color: var(--col4);
+    border: solid var(--col4) 1px;
+    background-color: var(--col3);
     border-radius: 10px;
     font-weight: bold;
     padding: 5px;
