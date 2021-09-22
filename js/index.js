@@ -5,51 +5,88 @@ let details = $(".details");
 //Evènement click permettant d'afficher les listes des baies, encounters, evolutions, generations, objets, lieux, machines, attaques et évidemment les pokemons
 $(".menu button").click(e => {
     liste.html("");
-    $.get(baseUrl + e.target.id, s => requeteListe(s, e.target.id));
+    requeteListe(baseUrl + e.target.id, e.target.id)
+    //   $.get(baseUrl + e.target.id, s => requeteListe(s, e.target.id));
 });
 
 
 //ma 1ère callBack
-function requeteListe(settings, id) {
-    for (let i in settings.results) {
-        $("<button class='details' id='details" + i + "'>" + settings.results[i].name + "</button><br>").appendTo(liste);
-        switch (id) {
-            case "berry":
-                $("#details" + i).click(() => {
-                    details.html("");
-                    $.get(settings.results[i].url, requeteDetailBerry);
-                });
-                break;
+function requeteListe(url, id) {
+    $.get(url, settings => {
+        let monOffset = new URL(url).searchParams.get("offset") || 0;
+        console.log(monOffset, url, settings);
+        for (let i in settings.results) {
+            if (settings.results[i].name === undefined) {
+                $("<button class='details' id='details" + i + "'>" + (+i + (+monOffset) + 1) + "</button><br>").appendTo(liste);
+            } else {
+                $("<button class='details' id='details" + i + "'>" + (+i + (+monOffset) + 1) + " : " + settings.results[i].name + "</button><br>").appendTo(liste);
+            }
 
-            case "contest-type":
-                $("#details" + i).click(() => {
-                    details.html("");
-                    $.get(settings.results[i].url, requeteDetailContestType);
-                });
-                break;
+            switch (id) {
+                case "berry":
+                    $("#details" + i).click(() => {
+                        details.html("");
+                        $.get(settings.results[i].url, requeteDetailBerry);
+                    });
+                    break;
 
-            case "encounter-method":
-                $("#details" + i).click(() => {
-                    details.html("");
-                    $.get(settings.results[i].url, requeteDetailEncounters);
-                });
-                break
+                case "contest-type":
+                    $("#details" + i).click(() => {
+                        details.html("");
+                        $.get(settings.results[i].url, requeteDetailContestType);
+                    });
+                    break;
+
+                case "encounter-method":
+                    $("#details" + i).click(() => {
+                        details.html("");
+                        $.get(settings.results[i].url, requeteDetailEncounters);
+                    });
+                    break;
+
+                case "evolution-chain":
+                    $("#details" + i).click(() => {
+                        details.html("");
+                        $.get(settings.results[i].url, requeteDetailEvolutions);
+                    });
+                    break;
+
+                case "generation":
+                    $("#details" + i).click(() => {
+                        details.html("");
+                        $.get(settings.results[i].url, requeteDetailGenerations);
+                    });
+                    break;
+            }
         }
-    }
+        if (settings.next !== null) {
+            $("<button id='next'>Page suivante</button><br>").appendTo(liste);
+            $("#next").click(() => {
+                liste.html("");
+                let monUrlSuivante = new URL(settings.next);
+                monUrlSuivante.searchParams.set("limit", 20);
+                requeteListe(monUrlSuivante.toString(), id);
+            });
+        }
+        if (settings.previous !== null) {
+            $("<button id='previous'>Page précédente</button><br>").appendTo(liste);
+            $("#previous").click(() => {
+                liste.html("");
+                let monUrlPrecedente = new URL(settings.previous);
+                monUrlPrecedente.searchParams.set("limit", 20);
+                requeteListe(monUrlPrecedente.toString(), id);
+            });
+        }
+    })
 }
 
-//Ma 2ème callBack
+//Ma Berry callBack
 function requeteDetailBerry(settings) {
-    // let parseDetails = JSON.stringify(settings);
     console.log(settings);
     liste.html("");
-    // $("<h3>Name :" + settings.name + "</h3><br><p>Firmness :" + settings.firmness.name + "</p><p>Item : " + settings.item.name + "</p>").appendTo(liste);
     $("<div> Name : " + settings.name + "</div>").appendTo(liste);
     $("<div> firmness : " + settings.firmness.name + "</div>").appendTo(liste);
-    // for(let f in settings.flavors) {
-    //     $("<div> flavor : " + string(settings.flavors[f].flavor.name) + "</div>").appendTo(liste);
-    // }
-    let txtTmp = "<div> flavor : "
+    let txtTmp = "<div> flavor : ";
     for (let f = 0; f <= settings.flavors.length - 2; f++) {
         txtTmp += settings.flavors[f].flavor.name + ", ";
     }
@@ -60,19 +97,39 @@ function requeteDetailBerry(settings) {
     $("<div> Item : " + settings.item.name + "</div>").appendTo(liste);
     $("<div> Max harvest : " + settings.max_harvest + "</div>").appendTo(liste);
     $("<div> Natural gift Power : " + settings.natural_gift_power + "</div>").appendTo(liste);
+    $("<div> Natural gift type : " + settings.natural_gift_type.name + "</div>").appendTo(liste);
+    $("<div> Size : " + settings.size + "</div>").appendTo(liste);
+    $("<div> Smoothness : " + settings.smoothness + "</div>").appendTo(liste);
+    $("<div> Soil dryness : " + settings.soil_dryness + "</div>").appendTo(liste);
 
 }
 
-//Ma 3ème callBack
+//Ma Contest-type callBack
 function requeteDetailContestType(settings) {
+    console.log(settings);
     liste.html("");
     $("<h3>" + settings.name + "</h3><br><p>Il s'agit de la statistique : " + settings.names[0].name + "</p>").appendTo(liste);
 }
 
-//Ma 4ème callBack
+//Ma Encounters callBack
 function requeteDetailEncounters(settings) {
+    console.log(settings);
     liste.html("");
     $("<h3>" + settings.name + "</h3><br><p>On les rencontre dans : " + settings.names[1].name + "</p>").appendTo(liste);
+}
+
+//Ma Evolutions callBack
+function requeteDetailEvolutions(settings) {
+    console.log(settings);
+    liste.html("");
+    $("<h3>" + settings.chain.species.name + "</h3><br><p>Evolue en : " + settings.chain.evolves_to[0].species.name + "</p>").appendTo(liste);
+}
+
+//Ma Generations callBack
+function requeteDetailGenerations(settings) {
+    console.log(settings);
+    liste.html("");
+    $("<h3>" + settings.chain.species.name + "</h3><br><p>Evolue en : " + settings.chain.evolves_to[0].species.name + "</p>").appendTo(liste);
 }
 
 function string(object) {
