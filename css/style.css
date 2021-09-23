@@ -72,3 +72,7 @@ body {
     padding: 5px;
     margin-bottom: 5px;
 }
+
+h3 {
+    color: var(--col2) !important;
+}

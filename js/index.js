@@ -122,7 +122,8 @@ function requeteDetailEncounters(settings) {
 function requeteDetailEvolutions(settings) {
     console.log(settings);
     liste.html("");
-    $("<h3>" + settings.chain.species.name + "</h3><br><p>Evolue en : " + settings.chain.evolves_to[0].species.name + "</p>").appendTo(details);
+    $("<h3>" + majuscule(settings.chain.species.name) + "</h3><br><p>évolue en</p> <h3>" + settings.chain.evolves_to[0].species.name + "</h3>").appendTo(details);
+    $("<p>qui évolue en</p> <h3>" + settings.chain.evolves_to[0].evolves_to[0].species.name + "</h3>").appendTo(details);
 }
 
 //Ma Generations callBack
@@ -134,4 +135,9 @@ function requeteDetailGenerations(settings) {
 
 function string(object) {
     return JSON.stringify(object);
+}
+
+function majuscule(objet) {
+    let monObjet = objet.toUpperCase().split("");
+
 }
