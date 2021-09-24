@@ -39,7 +39,8 @@ body {
 }
 
 #liste {
-    width: 90%;
+    width: 80%;
+    height: auto;
     margin: 30px auto;
     padding: 10px;
     display: flex;
@@ -74,5 +75,5 @@ body {
 }
 
 h3 {
-    color: var(--col2) !important;
+    color: var(--col1) !important;
 }

@@ -87,11 +87,11 @@ function requeteDetailBerry(settings) {
     liste.html("");
     $("<div> Name : " + settings.name + "</div>").appendTo(details);
     $("<div> firmness : " + settings.firmness.name + "</div>").appendTo(details);
-    let txtTmp = "<div> flavor : ";
-    for (let f = 0; f <= settings.flavors.length - 2; f++) {
+    let txtTmp = "<div> Existing flavors : ";
+    for (let f = 0; f <= settings.flavors.length - 1; f++) {
         txtTmp += settings.flavors[f].flavor.name + ", ";
     }
-    txtTmp += settings.flavors[4].flavor.name;
+    txtTmp = txtTmp.slice(0, txtTmp.length - 2);
     txtTmp += "</div>"
     $(txtTmp).appendTo(details);
     $("<div> Growth time : " + settings.growth_time + "</div>").appendTo(details);
@@ -122,15 +122,26 @@ function requeteDetailEncounters(settings) {
 function requeteDetailEvolutions(settings) {
     console.log(settings);
     liste.html("");
-    $("<h3>" + majuscule(settings.chain.species.name) + "</h3><br><p>évolue en</p> <h3>" + settings.chain.evolves_to[0].species.name + "</h3>").appendTo(details);
-    $("<p>qui évolue en</p> <h3>" + settings.chain.evolves_to[0].evolves_to[0].species.name + "</h3>").appendTo(details);
+    $("<h3>" + majuscule(settings.chain.species.name) + "</h3><p>évolue en</p> <h3>" + majuscule(settings.chain.evolves_to[0].species.name) + "</h3>").appendTo(details);
+    $("<p>qui évolue en</p> <h3>" + majuscule(settings.chain.evolves_to[0].evolves_to[0].species.name) + "</h3>").appendTo(details);
 }
 
 //Ma Generations callBack
 function requeteDetailGenerations(settings) {
     console.log(settings);
     liste.html("");
-    $("<h3>" + settings.chain.species.name + "</h3><br><p>Evolue en : " + settings.chain.evolves_to[0].species.name + "</p>").appendTo(details);
+
+    // $("<h3>Main region : " + majuscule(settings.main_region.name) + "</h3><h3>Versions des jeux : " + settings.version_groups[0].name + "</h3>").appendTo(details);
+
+    let txtTmp = "<h3>Main region : " + majuscule(settings.main_region.name) + "</h3><h3>Versions des jeux : ";
+
+    for (let v = 0; v <= settings.version_groups.length - 1; v++) {
+        txtTmp += majuscule(settings.version_groups[v].name) + ", ";
+    }
+    // txtTmp += settings.version_groups[v].join(','); mais impossible car objets dans le tableau, si c'était des strings ça marcherait.
+    txtTmp = txtTmp.slice(0, txtTmp.length - 2);
+    txtTmp += "</h3>";
+    $(txtTmp).appendTo(details);
 }
 
 function string(object) {
@@ -138,6 +149,6 @@ function string(object) {
 }
 
 function majuscule(objet) {
-    let monObjet = objet.toUpperCase().split("");
-
+    let monObjet = objet.toUpperCase();
+    return monObjet;
 }
